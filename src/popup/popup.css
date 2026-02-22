@@ -1,11 +1,12 @@
 :root {
-  --bg-a: #f7f3ec;
-  --bg-b: #eceff5;
-  --ink: #122033;
-  --ink-soft: #40556e;
-  --card: rgba(255, 255, 255, 0.8);
-  --accent: #0f766e;
-  --accent-2: #ea580c;
+  --bg-a: #0c1a30;
+  --bg-b: #122a44;
+  --ink: #eaf2ff;
+  --ink-soft: #b6c8df;
+  --card: rgba(255, 255, 255, 0.1);
+  --accent: #2dd4bf;
+  --accent-2: #f97316;
+  --line: rgba(255, 255, 255, 0.18);
 }
 
 * {
@@ -14,19 +15,25 @@
 
 body {
   margin: 0;
-  min-width: 320px;
+  width: 360px;
+  min-height: 520px;
   font-family: "Avenir Next", "Segoe UI", sans-serif;
-  background: radial-gradient(circle at top left, var(--bg-a), var(--bg-b));
+  background: radial-gradient(circle at 18% 8%, #1f4e87 0%, var(--bg-a) 42%, #091323 100%);
   color: var(--ink);
 }
 
 .popup {
-  padding: 14px;
+  padding: 14px 14px 10px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  margin: 8px;
+  background: linear-gradient(160deg, rgba(17, 39, 64, 0.92), rgba(7, 17, 30, 0.95));
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.42);
 }
 
 .hero h1 {
   margin: 0;
-  font-size: 28px;
+  font-size: 38px;
   line-height: 1;
   letter-spacing: -0.03em;
 }
@@ -34,7 +41,7 @@ body {
 .kicker {
   margin: 0 0 4px;
   color: var(--ink-soft);
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -49,14 +56,14 @@ body {
   margin-top: 12px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  gap: 6px;
 }
 
 .metric {
   background: var(--card);
-  border: 1px solid rgba(18, 32, 51, 0.09);
+  border: 1px solid var(--line);
   border-radius: 10px;
-  padding: 9px;
+  padding: 7px 8px;
 }
 
 .metric .label {
@@ -70,21 +77,22 @@ body {
 .metric strong {
   display: block;
   margin-top: 4px;
-  font-size: 17px;
+  font-size: 22px;
+  line-height: 1;
 }
 
 .summary {
   margin-top: 10px;
   border-left: 4px solid var(--accent);
   padding: 8px 10px;
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.12);
   border-radius: 8px;
 }
 
 .summary p {
   margin: 0;
-  font-size: 13px;
-  color: var(--ink);
+  font-size: 12px;
+  color: #d8e6f9;
 }
 
 .actions {
@@ -100,14 +108,26 @@ button {
   padding: 9px 10px;
   font-weight: 600;
   cursor: pointer;
+  transition: transform 120ms ease, filter 120ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
 }
 
 #refreshBtn {
-  background: #dbeafe;
-  color: #1e3a8a;
+  background: #7dd3fc;
+  color: #0c2848;
 }
 
 #dashboardBtn {
   background: linear-gradient(130deg, var(--accent), var(--accent-2));
   color: #ffffff;
+}
+
+#settingsBtn,
+#exportBtn {
+  background: rgba(255, 255, 255, 0.14);
+  color: #e6f0ff;
 }

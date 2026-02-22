@@ -87,7 +87,7 @@
       setSafeAttr(
         root,
         'style',
-        'position:fixed;right:12px;bottom:12px;z-index:2147483646;max-width:360px;background:#0f172a;color:#f8fafc;padding:12px;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.35);font:13px/1.4 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;'
+        'position:fixed;right:12px;bottom:74px;z-index:2147483646;max-width:380px;background:linear-gradient(145deg,#0f172a,#17376a);color:#f8fafc;padding:12px;border-radius:12px;box-shadow:0 10px 28px rgba(0,0,0,0.38);font:14px/1.45 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;border:1px solid rgba(255,255,255,0.18);'
       );
       document.body.appendChild(root);
     }
@@ -110,7 +110,7 @@
     }
 
     const closeBtn = createSafeElement('button', { text: 'Dismiss', attrs: { type: 'button' } });
-    setSafeAttr(closeBtn, 'style', 'margin-top:10px;cursor:pointer;');
+    setSafeAttr(closeBtn, 'style', 'margin-top:10px;cursor:pointer;border:0;border-radius:8px;background:#dbeafe;color:#1e3a8a;padding:8px 12px;font-weight:700;');
     closeBtn.addEventListener('click', () => root.remove());
     root.appendChild(closeBtn);
   }
@@ -123,7 +123,7 @@
       setSafeAttr(
         root,
         'style',
-        'position:fixed;inset:0;z-index:2147483647;background:rgba(2,6,23,0.62);display:flex;align-items:center;justify-content:center;padding:16px;'
+        'position:fixed;inset:0;z-index:2147483647;background:rgba(2,6,23,0.68);display:flex;align-items:center;justify-content:center;padding:16px;'
       );
       document.body.appendChild(root);
     }
@@ -132,7 +132,7 @@
     setSafeAttr(
       panel,
       'style',
-      'width:min(560px,95vw);background:#fff;color:#0f172a;border-radius:14px;padding:18px;box-shadow:0 20px 48px rgba(0,0,0,0.28);font:14px/1.4 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;'
+      'width:min(560px,95vw);background:#fff;color:#0f172a;border-radius:14px;padding:18px;box-shadow:0 20px 48px rgba(0,0,0,0.28);font:15px/1.5 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;border-top:6px solid #ef4444;'
     );
     panel.appendChild(createSafeElement('h2', { text: (payload && payload.title) || 'Mindset Intervention' }));
     panel.appendChild(createSafeElement('p', { text: (payload && payload.message) || '' }));
@@ -150,7 +150,7 @@
 
     const actions = createSafeElement('div', { attrs: { style: 'margin-top:12px;display:flex;justify-content:flex-end;' } });
     const dismiss = createSafeElement('button', { text: 'Dismiss', attrs: { type: 'button' } });
-    setSafeAttr(dismiss, 'style', 'border:0;border-radius:9px;padding:8px 12px;cursor:pointer;background:#dbeafe;color:#1e3a8a;font-weight:600;');
+    setSafeAttr(dismiss, 'style', 'border:0;border-radius:9px;padding:10px 14px;cursor:pointer;background:#dbeafe;color:#1e3a8a;font-weight:700;');
     dismiss.addEventListener('click', () => root.remove());
     actions.appendChild(dismiss);
     panel.appendChild(actions);
@@ -161,7 +161,7 @@
     let topBar = document.getElementById('mindset-v2-topbar');
     if (!topBar) {
       topBar = createSafeElement('div', { attrs: { id: 'mindset-v2-topbar' } });
-      setSafeAttr(topBar, 'style', 'position:fixed;top:0;left:0;right:0;z-index:2147483645;background:linear-gradient(90deg,#0f172a,#1e3a8a);color:#fff;padding:6px 12px;font:12px/1.3 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;display:flex;justify-content:space-between;gap:8px;box-shadow:0 2px 10px rgba(0,0,0,0.25);');
+      setSafeAttr(topBar, 'style', 'position:fixed;top:0;left:0;right:0;z-index:2147483645;background:linear-gradient(90deg,#0f172a,#1f4f9a);color:#fff;padding:10px 14px;font:14px/1.3 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;display:flex;justify-content:space-between;gap:8px;box-shadow:0 4px 14px rgba(0,0,0,0.3);');
       topBar.appendChild(createSafeElement('span', { attrs: { id: 'mindset-v2-topbar-left' } }));
       topBar.appendChild(createSafeElement('span', { attrs: { id: 'mindset-v2-topbar-right' } }));
       document.body.appendChild(topBar);
@@ -170,7 +170,7 @@
     let footer = document.getElementById('mindset-v2-footer');
     if (!footer) {
       footer = createSafeElement('div', { attrs: { id: 'mindset-v2-footer' } });
-      setSafeAttr(footer, 'style', 'position:fixed;left:0;right:0;bottom:0;z-index:2147483645;background:rgba(15,23,42,0.92);color:#f8fafc;padding:8px 12px;font:12px/1.3 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;display:flex;justify-content:space-between;gap:10px;align-items:center;backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,0.15);');
+      setSafeAttr(footer, 'style', 'position:fixed;left:0;right:0;bottom:0;z-index:2147483645;background:rgba(11,24,44,0.94);color:#f8fafc;padding:10px 14px;font:14px/1.3 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;display:flex;justify-content:space-between;gap:10px;align-items:center;backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,0.2);');
       footer.appendChild(createSafeElement('span', { attrs: { id: 'mindset-v2-footer-summary' } }));
       footer.appendChild(createSafeElement('span', { attrs: { id: 'mindset-v2-footer-meta' } }));
       document.body.appendChild(footer);

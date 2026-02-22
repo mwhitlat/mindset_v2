@@ -94,9 +94,11 @@ try {
   }));
 
   const dashboardChecks = await dashboard.evaluate(() => ({
-    hasTrend: Boolean(document.querySelector('.trendList')),
+    hasTrendChart: Boolean(document.querySelector('.trendChart')),
     hasFilters: Boolean(document.querySelector('.visitControls')),
-    hasActions: Boolean(document.querySelector('.dashActions'))
+    hasActions: Boolean(document.querySelector('.dashActions')),
+    hasHealthGauge: Boolean(document.querySelector('.healthGaugeCard')),
+    hasCategoryBars: Boolean(document.querySelector('.categoryBars'))
   }));
 
   const contentChecks = await content.evaluate(() => ({
@@ -108,7 +110,7 @@ try {
   if (!popupChecks.hasStatus || !popupChecks.hasMetrics || !popupChecks.hasActions) {
     throw new Error(`Popup UX checks failed: ${JSON.stringify(popupChecks)}`);
   }
-  if (!dashboardChecks.hasTrend || !dashboardChecks.hasFilters || !dashboardChecks.hasActions) {
+  if (!dashboardChecks.hasTrendChart || !dashboardChecks.hasFilters || !dashboardChecks.hasActions || !dashboardChecks.hasHealthGauge || !dashboardChecks.hasCategoryBars) {
     throw new Error(`Dashboard UX checks failed: ${JSON.stringify(dashboardChecks)}`);
   }
   if (!contentChecks.hasTopbar || !contentChecks.hasFooter || !contentChecks.hasEchoModal) {

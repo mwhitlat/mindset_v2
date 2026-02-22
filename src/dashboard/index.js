@@ -1,11 +1,61 @@
 import { ACTIONS } from '../shared/messages.js';
 import { clearChildren, createSafeElement } from '../shared/security.js';
+import { buildCategoryBars, buildHealthGaugeModel, buildTrendBars } from './visual-model.js';
 
 function appendStatCard(container, label, value) {
   const card = createSafeElement('article', { classes: ['card'] });
   card.appendChild(createSafeElement('span', { classes: ['label'], text: label }));
   card.appendChild(createSafeElement('strong', { classes: ['value'], text: value }));
   container.appendChild(card);
+}
+
+function getNarrative(summary = {}) {
+  const scores = summary.scores || {};
+  const overall = Number(scores.overallHealth ?? 0);
+  const credibility = Number(scores.credibility ?? 0);
+  const diversity = Number(scores.sourceDiversity ?? 0);
+  if (overall >= 8) {
+    return {
+      headline: 'Excellent digital diet this week.',
+      body: 'Keep this source mix and momentum. You are in a high-quality pattern.'
+    };
+  }
+  if (overall >= 6) {
+    if (credibility < 6) {
+      return {
+        headline: 'Stable baseline with credibility risk.',
+        body: 'Add one high-cred source today to pull your weekly score upward.'
+      };
+    }
+    if (diversity < 4) {
+      return {
+        headline: 'Good quality, low variety.',
+        body: 'Read 1-2 additional domains to reduce perspective blind spots.'
+      };
+    }
+    return {
+      headline: 'Healthy baseline with room to sharpen.',
+      body: 'Continue balancing viewpoints and keep your source quality high.'
+    };
+  }
+  return {
+    headline: 'Recovery week recommended.',
+    body: 'Prioritize trusted sources and broaden domain variety before long sessions.'
+  };
+}
+
+function renderHero(root, detail = {}) {
+  const summary = detail.summary || {};
+  const narrative = getNarrative(summary);
+  const hero = createSafeElement('section', { classes: ['hero'] });
+  hero.appendChild(createSafeElement('h1', { classes: ['headline'], text: 'Mindset v2 Dashboard' }));
+  hero.appendChild(createSafeElement('p', { classes: ['subline'], text: `Week ${detail.weekKey || '-'} overview` }));
+
+  const narrativeCard = createSafeElement('div', { classes: ['narrative'] });
+  narrativeCard.appendChild(createSafeElement('h2', { classes: ['narrativeTitle'], text: narrative.headline }));
+  narrativeCard.appendChild(createSafeElement('p', { classes: ['narrativeBody'], text: narrative.body }));
+  hero.appendChild(narrativeCard);
+  root.appendChild(hero);
 }
 
 function renderVisitsTable(root, visits = []) {
@@ -94,21 +144,88 @@ function renderVisitSection(root, visits = []) {
   rerender();
 }
 
+function renderHealthGauge(root, summary = {}) {
+  root.appendChild(createSafeElement('h2', { classes: ['sectionTitle'], text: 'Health Snapshot' }));
+  const scores = summary.scores || {};
+  const gauge = buildHealthGaugeModel(scores.overallHealth);
+
+  const card = createSafeElement('section', { classes: ['healthGaugeCard'] });
+  const header = createSafeElement('div', { classes: ['healthHeader'] });
+  header.appendChild(createSafeElement('span', { classes: ['label'], text: 'Overall health' }));
+  header.appendChild(createSafeElement('strong', { classes: ['healthScore'], text: `${gauge.scoreLabel}/10` }));
+  card.appendChild(header);
+
+  const track = createSafeElement('div', { classes: ['healthGaugeTrack'] });
+  const fill = createSafeElement('div', {
+    classes: ['healthGaugeFill', gauge.bandClass],
+    attrs: { style: `width:${gauge.percent}%;` }
+  });
+  track.appendChild(fill);
+  card.appendChild(track);
+
+  card.appendChild(createSafeElement('p', { classes: ['muted'], text: `${gauge.bandLabel} range` }));
+  root.appendChild(card);
+}
+
+function renderCategoryDistribution(root, categories = {}) {
+  root.appendChild(createSafeElement('h2', { classes: ['sectionTitle'], text: 'Category Mix' }));
+  const wrap = createSafeElement('section', { classes: ['categoryBars'] });
+  const bars = buildCategoryBars(categories);
+  if (!bars.length) {
+    wrap.appendChild(createSafeElement('p', { classes: ['muted'], text: 'No category data yet.' }));
+    root.appendChild(wrap);
+    return;
+  }
+
+  bars.forEach((bar) => {
+    const row = createSafeElement('article', { classes: ['categoryRow'] });
+    const labels = createSafeElement('div', { classes: ['categoryLabels'] });
+    labels.appendChild(createSafeElement('span', { text: bar.name }));
+    labels.appendChild(createSafeElement('strong', { text: `${bar.count} (${bar.percent}%)` }));
+    row.appendChild(labels);
+
+    const track = createSafeElement('div', { classes: ['categoryTrack'] });
+    track.appendChild(createSafeElement('div', {
+      classes: ['categoryFill'],
+      attrs: { style: `width:${bar.percent}%;` }
+    }));
+    row.appendChild(track);
+    wrap.appendChild(row);
+  });
+  root.appendChild(wrap);
+}
+
 function renderTrend(root, points = []) {
   root.appendChild(createSafeElement('h2', { classes: ['sectionTitle'], text: 'Trend (Last Weeks)' }));
-  if (!points.length) {
+  const bars = buildTrendBars(points);
+  if (!bars.length) {
     root.appendChild(createSafeElement('p', { classes: ['muted'], text: 'Not enough weekly history yet.' }));
     return;
   }
-  const list = createSafeElement('div', { classes: ['trendList'] });
-  points.forEach((point) => {
-    const row = createSafeElement('div', { classes: ['trendRow'] });
-    row.appendChild(createSafeElement('span', { text: point.weekKey }));
-    row.appendChild(createSafeElement('span', { text: `Visits ${point.visits}` }));
-    row.appendChild(createSafeElement('span', { text: `Health ${point.overallHealth ?? '-'}` }));
-    list.appendChild(row);
+  const chart = createSafeElement('div', { classes: ['trendChart'] });
+  bars.forEach((point) => {
+    const row = createSafeElement('article', { classes: ['trendRow'] });
+    row.appendChild(createSafeElement('strong', { text: point.weekKey }));
+
+    const visitsTrack = createSafeElement('div', { classes: ['trendTrack'] });
+    visitsTrack.appendChild(createSafeElement('div', {
+      classes: ['trendFill', 'trendVisits'],
+      attrs: { style: `width:${point.visitsPercent}%;` }
+    }));
+    row.appendChild(createSafeElement('span', { classes: ['muted'], text: `Visits ${point.visits}` }));
+    row.appendChild(visitsTrack);
+
+    const healthTrack = createSafeElement('div', { classes: ['trendTrack'] });
+    healthTrack.appendChild(createSafeElement('div', {
+      classes: ['trendFill', 'trendHealth'],
+      attrs: { style: `width:${point.healthPercent}%;` }
+    }));
+    row.appendChild(createSafeElement('span', { classes: ['muted'], text: `Health ${point.health ?? '-'}` }));
+    row.appendChild(healthTrack);
+
+    chart.appendChild(row);
   });
-  root.appendChild(list);
+  root.appendChild(chart);
 }
 
 function renderActions(root) {
@@ -152,10 +269,7 @@ export function renderDashboard(root, detail = {}) {
   const totals = summary.totals || {};
   const categories = summary.categories || {};
 
-  root.appendChild(createSafeElement('h1', { classes: ['headline'], text: 'Mindset v2 Dashboard' }));
-  root.appendChild(
-    createSafeElement('p', { classes: ['subline'], text: `Week ${detail.weekKey || '-'} overview` })
-  );
+  renderHero(root, detail);
 
   const statGrid = createSafeElement('section', { classes: ['statGrid'] });
   appendStatCard(statGrid, 'Overall Health', scores.overallHealth == null ? '-' : Number(scores.overallHealth).toFixed(1));
@@ -163,17 +277,8 @@ export function renderDashboard(root, detail = {}) {
   appendStatCard(statGrid, 'Unique Domains', String(totals.domains ?? 0));
   root.appendChild(statGrid);
 
-  root.appendChild(createSafeElement('h2', { classes: ['sectionTitle'], text: 'Category Mix' }));
-  const categoryWrap = createSafeElement('section', { classes: ['categoryList'] });
-  const entries = Object.entries(categories).sort((a, b) => b[1] - a[1]);
-  if (!entries.length) {
-    categoryWrap.appendChild(createSafeElement('p', { classes: ['muted'], text: 'No category data yet.' }));
-  } else {
-    entries.forEach(([name, count]) => {
-      categoryWrap.appendChild(createSafeElement('span', { classes: ['pill'], text: `${name}: ${count}` }));
-    });
-  }
-  root.appendChild(categoryWrap);
+  renderHealthGauge(root, summary);
+  renderCategoryDistribution(root, categories);
 
   renderVisitSection(root, detail.visits || []);
   renderTrend(root, detail.trend || []);

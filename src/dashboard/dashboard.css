@@ -1,10 +1,12 @@
 :root {
-  --paper: #f6f2e8;
-  --ink: #142234;
-  --ink-soft: #4d657f;
+  --paper: #f2f4f8;
+  --ink: #17263b;
+  --ink-soft: #4f6b8a;
   --card: #ffffff;
-  --line: #e2e8f0;
+  --line: #d7e0ea;
   --accent: #0f766e;
+  --hero-a: #4259d6;
+  --hero-b: #7b4ec5;
 }
 
 * {
@@ -14,7 +16,7 @@
 body {
   margin: 0;
   font-family: "Avenir Next", "Segoe UI", sans-serif;
-  background: linear-gradient(170deg, var(--paper), #edf2f8);
+  background: linear-gradient(170deg, #f3f5fa, #eef3f8);
   color: var(--ink);
 }
 
@@ -25,14 +27,43 @@ body {
 }
 
 .headline {
-  margin: 0;
-  font-size: 34px;
+  margin: 0 0 6px;
+  font-size: 40px;
   letter-spacing: -0.03em;
+  color: #f8fbff;
 }
 
 .subline {
-  margin: 6px 0 18px;
-  color: var(--ink-soft);
+  margin: 2px 0 0;
+  color: rgba(240, 248, 255, 0.88);
+}
+
+.hero {
+  margin-bottom: 14px;
+  border-radius: 16px;
+  padding: 18px;
+  background: linear-gradient(130deg, var(--hero-a), var(--hero-b));
+  box-shadow: 0 16px 30px rgba(66, 89, 214, 0.25);
+}
+
+.narrative {
+  margin-top: 14px;
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.narrativeTitle {
+  margin: 0;
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.narrativeBody {
+  margin: 6px 0 0;
+  color: rgba(244, 249, 255, 0.95);
+  font-size: 14px;
 }
 
 .statGrid {
@@ -43,9 +74,10 @@ body {
 
 .card {
   background: var(--card);
-  border: 1px solid var(--line);
+  border: 1px solid #cad6e6;
   border-radius: 12px;
   padding: 14px;
+  box-shadow: 0 5px 14px rgba(15, 23, 42, 0.06);
 }
 
 .card .label {
@@ -64,7 +96,8 @@ body {
 
 .sectionTitle {
   margin: 22px 0 10px;
-  font-size: 20px;
+  font-size: 34px;
+  letter-spacing: -0.02em;
 }
 
 .categoryList {
@@ -78,7 +111,7 @@ body {
   border: 1px solid var(--line);
   background: #fff;
   padding: 5px 10px;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 table {
@@ -95,7 +128,7 @@ td {
   text-align: left;
   padding: 10px;
   border-bottom: 1px solid var(--line);
-  font-size: 14px;
+  font-size: 17px;
 }
 
 thead th {
@@ -111,15 +144,120 @@ thead th {
   gap: 6px;
 }
 
-.trendRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
+.healthGaugeCard {
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 8px 10px;
-  font-size: 13px;
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.healthHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.healthScore {
+  font-size: 22px;
+}
+
+.healthGaugeTrack {
+  margin-top: 10px;
+  width: 100%;
+  height: 14px;
+  border-radius: 999px;
+  background: #e8eef7;
+  overflow: hidden;
+}
+
+.healthGaugeFill {
+  height: 100%;
+  border-radius: inherit;
+}
+
+.bandHigh {
+  background: linear-gradient(90deg, #10b981, #22c55e);
+}
+
+.bandMid {
+  background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+}
+
+.bandLow {
+  background: linear-gradient(90deg, #fb7185, #f97316);
+}
+
+.bandNone {
+  background: #9aa8bd;
+}
+
+.categoryBars {
+  display: grid;
+  gap: 8px;
+}
+
+.categoryRow {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.categoryLabels {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.categoryTrack {
+  height: 10px;
+  background: #e8eef7;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.categoryFill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #4f7cff, #19b0ec);
+}
+
+.trendChart {
+  display: grid;
+  gap: 10px;
+}
+
+.trendRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 10px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 15px;
+}
+
+.trendTrack {
+  grid-column: 1 / -1;
+  height: 9px;
+  border-radius: 999px;
+  background: #e8eef7;
+  overflow: hidden;
+}
+
+.trendFill {
+  height: 100%;
+  border-radius: inherit;
+}
+
+.trendVisits {
+  background: linear-gradient(90deg, #7c3aed, #3b82f6);
+}
+
+.trendHealth {
+  background: linear-gradient(90deg, #14b8a6, #84cc16);
 }
 
 .dashActions {
@@ -132,11 +270,12 @@ thead th {
 .dashActions button {
   border: 0;
   border-radius: 9px;
-  padding: 8px 10px;
+  padding: 10px 14px;
   cursor: pointer;
-  background: #dbeafe;
-  color: #1e3a8a;
+  background: linear-gradient(130deg, #dbeafe, #c7d7f2);
+  color: #173b7b;
   font-weight: 600;
+  font-size: 16px;
 }
 
 .visitControls {
@@ -148,9 +287,10 @@ thead th {
 
 .visitControls input,
 .visitControls select {
-  padding: 8px;
+  padding: 10px;
   border-radius: 8px;
   border: 1px solid var(--line);
+  font-size: 15px;
 }
 
 @media (max-width: 780px) {
