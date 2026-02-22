@@ -1,0 +1,163 @@
+:root {
+  --paper: #f6f2e8;
+  --ink: #142234;
+  --ink-soft: #4d657f;
+  --card: #ffffff;
+  --line: #e2e8f0;
+  --accent: #0f766e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  background: linear-gradient(170deg, var(--paper), #edf2f8);
+  color: var(--ink);
+}
+
+.dashboardRoot {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.headline {
+  margin: 0;
+  font-size: 34px;
+  letter-spacing: -0.03em;
+}
+
+.subline {
+  margin: 6px 0 18px;
+  color: var(--ink-soft);
+}
+
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.card .label {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+
+.card .value {
+  display: block;
+  margin-top: 5px;
+  font-size: 24px;
+}
+
+.sectionTitle {
+  margin: 22px 0 10px;
+  font-size: 20px;
+}
+
+.categoryList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 5px 10px;
+  font-size: 13px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+
+thead th {
+  background: #f8fafc;
+}
+
+.muted {
+  color: var(--ink-soft);
+}
+
+.trendList {
+  display: grid;
+  gap: 6px;
+}
+
+.trendRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.dashActions {
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.dashActions button {
+  border: 0;
+  border-radius: 9px;
+  padding: 8px 10px;
+  cursor: pointer;
+  background: #dbeafe;
+  color: #1e3a8a;
+  font-weight: 600;
+}
+
+.visitControls {
+  display: grid;
+  grid-template-columns: 180px 180px 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.visitControls input,
+.visitControls select {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+
+@media (max-width: 780px) {
+  .statGrid {
+    grid-template-columns: 1fr;
+  }
+  .visitControls {
+    grid-template-columns: 1fr;
+  }
+}

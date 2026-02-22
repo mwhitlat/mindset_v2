@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mindset v2</title>
+    <link rel="stylesheet" href="./popup.css">
+  </head>
+  <body>
+    <main class="popup">
+      <header class="hero">
+        <p class="kicker">Digital Diet Tracker</p>
+        <h1>Mindset v2</h1>
+        <p id="status" class="status">Connecting...</p>
+      </header>
+
+      <section class="metrics">
+        <article class="metric">
+          <span class="label">Visits</span>
+          <strong id="visitsValue">-</strong>
+        </article>
+        <article class="metric">
+          <span class="label">Domains</span>
+          <strong id="domainsValue">-</strong>
+        </article>
+        <article class="metric">
+          <span class="label">Credibility</span>
+          <strong id="credibilityValue">-</strong>
+        </article>
+      </section>
+
+      <section class="summary">
+        <p id="summary">Loading weekly summary...</p>
+      </section>
+
+      <section class="actions">
+        <button id="refreshBtn" type="button">Refresh</button>
+        <button id="dashboardBtn" type="button">Open Dashboard</button>
+        <button id="settingsBtn" type="button">Settings</button>
+        <button id="exportBtn" type="button">Export CSV</button>
+      </section>
+    </main>
+    <script type="module" src="./popup.js"></script>
+  </body>
+</html>

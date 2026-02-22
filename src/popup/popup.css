@@ -1,0 +1,113 @@
+:root {
+  --bg-a: #f7f3ec;
+  --bg-b: #eceff5;
+  --ink: #122033;
+  --ink-soft: #40556e;
+  --card: rgba(255, 255, 255, 0.8);
+  --accent: #0f766e;
+  --accent-2: #ea580c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top left, var(--bg-a), var(--bg-b));
+  color: var(--ink);
+}
+
+.popup {
+  padding: 14px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.kicker {
+  margin: 0 0 4px;
+  color: var(--ink-soft);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.status {
+  margin: 8px 0 0;
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+
+.metrics {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.metric {
+  background: var(--card);
+  border: 1px solid rgba(18, 32, 51, 0.09);
+  border-radius: 10px;
+  padding: 9px;
+}
+
+.metric .label {
+  display: block;
+  font-size: 11px;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.metric strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 17px;
+}
+
+.summary {
+  margin-top: 10px;
+  border-left: 4px solid var(--accent);
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 8px;
+}
+
+.summary p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+button {
+  border: 0;
+  border-radius: 9px;
+  padding: 9px 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#refreshBtn {
+  background: #dbeafe;
+  color: #1e3a8a;
+}
+
+#dashboardBtn {
+  background: linear-gradient(130deg, var(--accent), var(--accent-2));
+  color: #ffffff;
+}

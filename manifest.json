@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "Mindset v2",
+  "version": "0.0.1",
+  "description": "Privacy-first digital diet tracker (v2 workspace scaffold)",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "src/background/index.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "Mindset v2"
+  },
+  "options_page": "src/settings/settings.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/content/index.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

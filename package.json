@@ -1,0 +1,17 @@
+{
+  "name": "mindset-v2",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:unit": "node --test tests/unit/*.test.mjs",
+    "test:integration": "node --test tests/integration/*.test.mjs",
+    "test:e2e": "node --test tests/e2e/*.test.mjs",
+    "test:browser": "node tests/e2e/browser-smoke-playwright.mjs",
+    "test:all": "npm run test:unit && npm run test:integration && npm run test:e2e && npm run test:browser",
+    "build:package": "node scripts/package-extension.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.58.2"
+  }
+}

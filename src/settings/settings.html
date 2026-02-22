@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mindset v2 Settings</title>
+    <link rel="stylesheet" href="./settings.css">
+  </head>
+  <body>
+    <main class="settings">
+      <h1>Mindset v2 Settings</h1>
+      <p id="statusText">Loading settings...</p>
+
+      <section class="card">
+        <h2>Guidance</h2>
+        <label><input id="trackingEnabled" type="checkbox"> Tracking enabled</label>
+        <label>
+          Credibility guidance
+          <select id="credibilityGuidance">
+            <option value="off">Off</option>
+            <option value="gentle">Gentle</option>
+            <option value="standard">Standard</option>
+            <option value="strong">Strong</option>
+          </select>
+        </label>
+        <label>
+          Low credibility threshold
+          <input id="lowCredibilityThreshold" type="number" min="1" max="9.5" step="0.1">
+        </label>
+      </section>
+
+      <section class="card">
+        <h2>Interventions</h2>
+        <label><input id="enableSameStoryUpgrade" type="checkbox"> Same-story upgrade</label>
+        <label>
+          Same-story threshold
+          <input id="sameStoryThreshold" type="number" min="1" max="9.5" step="0.1">
+        </label>
+        <label><input id="enableEchoChamberBreaker" type="checkbox"> Echo-chamber breaker</label>
+        <label>
+          Echo streak threshold
+          <input id="echoChamberBreakerThreshold" type="number" min="3" max="15" step="1">
+        </label>
+      </section>
+
+      <section class="card">
+        <h2>Privacy and Data</h2>
+        <label>
+          Data retention days
+          <input id="dataRetentionDays" type="number" min="7" max="365" step="1">
+        </label>
+        <div class="row">
+          <button id="saveBtn" type="button">Save Settings</button>
+          <button id="exportBtn" type="button">Export Data</button>
+          <button id="clearBtn" type="button">Clear Data</button>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="./settings.js"></script>
+  </body>
+</html>

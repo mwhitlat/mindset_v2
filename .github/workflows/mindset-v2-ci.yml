@@ -1,0 +1,40 @@
+name: mindset-v2-ci
+
+on:
+  push:
+    paths:
+      - 'mindset-v2/**'
+      - '.github/workflows/mindset-v2-ci.yml'
+  pull_request:
+    paths:
+      - 'mindset-v2/**'
+      - '.github/workflows/mindset-v2-ci.yml'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mindset-v2
+    strategy:
+      matrix:
+        node-version: [20.x, 22.x]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+          cache-dependency-path: mindset-v2/package-lock.json
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright Chromium
+        run: npx playwright install chromium
+
+      - name: Run all tests
+        run: npm run test:all
